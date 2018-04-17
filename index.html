@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comming Soon!</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<div class="overlay">
+<div class="counter-box">
+    <div class="logo"><img src="./img/logo.png"></div>
+    <h1>COOMING SOON</h1>
+    <div class="counter" id="app">
+
+
+        <div class="days">
+            {{daysCounter}}<br/><small>Days</small>
+        </div>
+        <div class="min">
+            {{hoursCounter}}<br/><small>Hours</small>
+        </div>
+        <div class="min">
+            {{minCounter}}<br/><small>Minutes</small>
+        </div>
+        <div class="sec">
+            {{secCounter}}<br/><small>Seconds</small>
+
+
+        </div>
+
+</div>
+
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+
+                currentDate: new Date(),
+                endDate: new Date("December 22, 2020 14:00").getTime(),
+                diffrence: 0
+            },
+            created() {
+                setInterval(()=>{
+                    this.currentDate =  new Date().getTime();
+
+                    return this.diffrence = this.endDate - this.currentDate;
+
+                },1000)
+            },
+            computed:{
+
+                daysCounter(){
+                    return Math.floor(this.diffrence / (1000 * 60 * 60 * 24) );
+                },
+                hoursCounter(){
+                    return Math.floor((this.diffrence % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) );
+                },
+                minCounter(){
+                    return Math.floor((this.diffrence % (1000 * 60 * 60 )) / (1000 * 60) );
+                },
+                secCounter(){
+                    return Math.floor((this.diffrence % (1000 * 60)) / (1000) );
+                }
+            }
+
+    });
+</script>
+</body>
+</html>
